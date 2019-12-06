@@ -19,7 +19,7 @@ exports.verifyToken = async (req) => {
     let decoded = null;
     try {
         decoded = await jwt.verify(token, salt);
-        logger.info(`JWT verify method response: ${decoded}`);
+        logger.info(`JWT verify method response: ${JSON.stringify(decoded)}`);
     } catch (error) {
         logger.error(`JWT verify method error: ${error}`);
         throw new Error(error);

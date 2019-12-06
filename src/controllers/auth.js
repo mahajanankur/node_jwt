@@ -17,7 +17,7 @@ router.post("/token", async (req, res, next) => {
 router.get("/token/verify", async (req, res, next) => {
     let verify;
     try {
-        let verify = await verifyToken(req);
+        verify = await verifyToken(req);
     } catch (error) {
         res.status(401).json(new Response(false, "Token is not valid."));
         return;
