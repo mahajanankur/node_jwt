@@ -1,0 +1,9 @@
+{
+    "server": {
+        "port": "1143",
+        "profile": "combined"
+    },
+    "jwt": {
+        "salt": "$$thisishowwerole$$"
+    }
+}
