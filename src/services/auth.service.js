@@ -13,7 +13,7 @@ exports.generateToken = async (req) => {
     return token;
 }
 
-exports.verifyToken = async (req) => {
+exports.verifyToken = async (req, next) => {
     let token = req.header("Auth");
     logger.info(`Auth header received: ${token}`);
     let decoded = null;

@@ -11,19 +11,18 @@ const router = express.Router();
 
 router.post("/token", async (req, res, next) => {
     let token = await generateToken(req);
-    res.json(new Response(true, "Generated token.", token));
+    return res.json(new Response(true, "Generated token.", token));
 });
 
 router.get("/token/verify", async (req, res, next) => {
     let verify;
     try {
-        verify = await verifyToken(req);
+        verify = await verifyToken(req, next);
     } catch (error) {
-        res.status(401).json(new Response(false, "Token is not valid."));
-        return;
+        return res.status(401).json(new Response(false, "Token is not valid."));
+        // return next(new Error("Not a valid token."));
     }
-
-    res.json(new Response(true, "Verified token.", verify));
+    return res.json(new Response(true, "Verified token.", verify));
 });
 
 

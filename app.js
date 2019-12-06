@@ -1,5 +1,5 @@
 const express = require("express");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const config = require("config");
 const log4js = require("log4js");
@@ -30,22 +30,24 @@ const server = express();
 
 server.use(helmet());
 
+//log4js is used as morgan, use either this or morgan.
 server.use(log4js.connectLogger(logger, {
-    level: 'auto'
+    // level: 'auto'
+    level: 'info'
 }));
 
 //Configure log4js logger as morgan rest.
-const theHTTPLog = morgan(profile, {
-    "stream": {
-        write: function (log) {
-            logger.info(log);
-        }
-    }
-});
+// const theHTTPLog = morgan(profile, {
+//     "stream": {
+//         write: function (log) {
+//             logger.info(log);
+//         }
+//     }
+// });
 
 //Configure the rest api logger
 // server.use(morgan(profile));
-server.use(theHTTPLog);
+// server.use(theHTTPLog);
 
 //Configure the JSON body parser for request.
 server.use(bodyParser.json());
@@ -59,4 +61,4 @@ server.listen(port, () => {
 server.use("/api/auth", authController);
 
 //Exception Advice - Define all routes above this.
-// server.use(sendExceptionResponse);
+server.use(sendExceptionResponse);
